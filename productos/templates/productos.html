@@ -1,0 +1,26 @@
+<!-- productos/templates/productos.html -->
+{% extends 'base.html' %}
+{% block title %}Lista de Productos{% endblock %}
+
+{% block header %}
+    <h2>Lista de Productos</h2>
+{% endblock %}
+
+{% block content %}
+<div class="lista-productos">
+    {% for producto in productos %}
+        <div class="tarjeta-producto">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            {% endif %}
+            <h2>{{ producto.nombre }}</h2>
+            <p class="precio">${{ producto.precio }}</p>
+            <p>{{ producto.descripcion|truncatechars:100 }}...</p>
+            <div class="grupo-botones">
+                <button class="boton">Comprar</button>
+                <a href="{% url 'detalle' producto.id %}" class="boton">Detalles</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
